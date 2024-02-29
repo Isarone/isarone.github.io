@@ -48,7 +48,7 @@
         );
       }
 
-      function detectIosWebView() {
+      function detectWebView() {
         // Method #1
         // See: https://developer.apple.com/documentation/webkit/wkscriptmessagehandler
         // window.webkit.messageHandlers is defined in WKWebView with WKScriptMessageHandler
@@ -123,7 +123,7 @@
         );
       }
 
-      const propertiesNavigator = () => {
+      const propertiesNavigator = (isWebView) => {
         const uaParser = new UAParser(window.navigator.userAgent);
         const browser = uaParser.getBrowser();
         const result = uaParser.getOS();
@@ -133,7 +133,7 @@
 
         const device = result.device; //HTC, SAMSUNG ..
         const so = ""; //result.os.name; //Android, IOS
-        const navigator = ""; //result.browser.name; //Safari, Chrome, ..
+        const navigator = isWebView ? window.navigator.userAgent : ""; //result.browser.name; //Safari, Chrome, ..
         return {
           device,
           so,
@@ -143,26 +143,18 @@
     </script>
 
     <script>
-      console.log("entro");
       let osEl = document.querySelector("#os-text");
       let deviceEl = document.querySelector("#device-text");
       let webViewEl = document.querySelector("#web-view-text");
       let navigatorEl = document.querySelector("#navigator-text");
 
-      const { device, so, navigator } = propertiesNavigator();
-      console.log("so => " + so);
+      const isWebView = detectWebView();
+      const { device, so, navigator } = propertiesNavigator(isWebView);
+
       osEl.textContent = so;
       deviceEl.textContent = device;
       navigatorEl.textContent = navigator;
-      webViewEl.textContent = isMovil() && detectIosWebView() ? "Yes" : "No";
-
-      // if (isiOS()) {
-      //   osEl.textContent = "iOS";
-      //   webViewEl.textContent = detectIosWebView() ? "Yes" : "No";
-      // } else {
-      //   osEl.textContent = "This is not an iOS browser";
-      //   webViewEl.textContent = "n/a";
-      // }
+      webViewEl.textContent = isMovil() && detectWebView() ? "Yes" : "No";
     </script>
   </body>
 </html>
