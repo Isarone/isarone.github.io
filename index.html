@@ -29,6 +29,25 @@
     <div>WebView: <span id="web-view-text"></span></div>
 
     <script>
+      function isMovil() {
+        if ("maxTouchPoints" in window.navigator)
+          return window.navigator.maxTouchPoints > 0;
+
+        const mQ = matchMedia?.("(pointer:coarse)");
+        if (mQ?.media === "(pointer:coarse)") return !!mQ.matches;
+
+        if ("orientation" in window) return true;
+
+        return (
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(
+            window.navigator.userAgent
+          ) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(
+            window.navigator.userAgent
+          )
+        );
+      }
+
       function detectIosWebView() {
         // Method #1
         // See: https://developer.apple.com/documentation/webkit/wkscriptmessagehandler
@@ -43,16 +62,16 @@
 
         // Method #2
         // This code relies on CSS styles
-        /* 
-            html {
-                height: 100vh;
-            }
+        /*
+                  html {
+                      height: 100vh;
+                  }
 
-            body {
-                height: 100%;
-                position: fixed;
-            }
-        */
+                  body {
+                      height: 100%;
+                      position: fixed;
+                  }
+              */
 
         const webViewMode =
           window.document?.documentElement?.clientHeight ===
@@ -107,11 +126,14 @@
       const propertiesNavigator = () => {
         const uaParser = new UAParser(window.navigator.userAgent);
         const browser = uaParser.getBrowser();
-        const os = uaParser.getOS();
+        const result = uaParser.getOS();
 
-        const device = os.device; //HTC, SAMSUNG ..
-        const so = os.name; //Android, IOS
-        const navigator = os.browser.name; //Safari, Chrome, ..
+        console.table(result);
+        console.table(browser);
+
+        const device = result.device; //HTC, SAMSUNG ..
+        const so = ""; //result.os.name; //Android, IOS
+        const navigator = ""; //result.browser.name; //Safari, Chrome, ..
         return {
           device,
           so,
@@ -121,17 +143,18 @@
     </script>
 
     <script>
+      console.log("entro");
       let osEl = document.querySelector("#os-text");
       let deviceEl = document.querySelector("#device-text");
       let webViewEl = document.querySelector("#web-view-text");
       let navigatorEl = document.querySelector("#navigator-text");
 
       const { device, so, navigator } = propertiesNavigator();
-
+      console.log("so => " + so);
       osEl.textContent = so;
       deviceEl.textContent = device;
       navigatorEl.textContent = navigator;
-      webViewEl.textContent = detectIosWebView() ? "Yes" : "No";
+      webViewEl.textContent = isMovil() && detectIosWebView() ? "Yes" : "No";
 
       // if (isiOS()) {
       //   osEl.textContent = "iOS";
@@ -143,25 +166,3 @@
     </script>
   </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Test</title>
-  </head>
-  <body>
-    <h1>Test para WebView</h1>
-
-    <hr />
-    <div id="divNavegador"></div>
-    <br />
-    <div id="divNWebView"></div>
-    <p>.....test</p>
-    <a href="https://milen-yordanov.github.io/detect-ios-webview/index.html"
-      >test 2 - la ultima</a
-    >
-    <script src="./index.js"></script>
-  </body>
-</html> -->
