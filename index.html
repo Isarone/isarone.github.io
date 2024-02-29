@@ -24,6 +24,8 @@
     >
 
     <div>OS: <span id="os-text"></span></div>
+    <div>Device: <span id="device-text"></span></div>
+    <div>Navigator: <span id="navigator-text"></span></div>
     <div>WebView: <span id="web-view-text"></span></div>
 
     <script>
@@ -101,19 +103,43 @@
           isMobileSafariInDesktopMode()
         );
       }
+
+      const propertiesNavigator = () => {
+        const uaParser = new UAParser(window.navigator.userAgent);
+        const browser = uaParser.getBrowser();
+        const os = uaParser.getOS();
+
+        const device = os.device; //HTC, SAMSUNG ..
+        const so = os.name; //Android, IOS
+        const navigator = os.browser.name; //Safari, Chrome, ..
+        return {
+          device,
+          so,
+          navigator,
+        };
+      };
     </script>
 
     <script>
       let osEl = document.querySelector("#os-text");
+      let deviceEl = document.querySelector("#device-text");
       let webViewEl = document.querySelector("#web-view-text");
+      let navigatorEl = document.querySelector("#navigator-text");
 
-      if (isiOS()) {
-        osEl.textContent = "iOS";
-        webViewEl.textContent = detectIosWebView() ? "Yes" : "No";
-      } else {
-        osEl.textContent = "This is not an iOS browser";
-        webViewEl.textContent = "n/a";
-      }
+      const { device, so, navigator } = propertiesNavigator();
+
+      osEl.textContent = so;
+      deviceEl.textContent = device;
+      navigatorEl.textContent = navigator;
+      webViewEl.textContent = detectIosWebView() ? "Yes" : "No";
+
+      // if (isiOS()) {
+      //   osEl.textContent = "iOS";
+      //   webViewEl.textContent = detectIosWebView() ? "Yes" : "No";
+      // } else {
+      //   osEl.textContent = "This is not an iOS browser";
+      //   webViewEl.textContent = "n/a";
+      // }
     </script>
   </body>
 </html>
