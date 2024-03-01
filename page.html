@@ -7,5 +7,12 @@
   </head>
   <body>
     Entro a la pagina de Rimac
+    <pre></pre>
+    <script>
+      document.querySelector("pre").innerText = window.location.search?.replace(
+        "?",
+        ""
+      );
+    </script>
   </body>
 </html>
