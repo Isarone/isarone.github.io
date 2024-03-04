@@ -7,7 +7,7 @@ const setStorageEmbedded = () => {
 };
 
 const load = () => {
-  setStorageEmbedded();
+  //setStorageEmbedded();
   const storage = showStorageEmbedded();
   document.querySelector("#storage").innerText = storage;
 };
