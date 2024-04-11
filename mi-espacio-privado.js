@@ -5,7 +5,9 @@ function addEspacioPrivado() {
 
   //const url = "https://b58xfhbh-3001.brs.devtunnels.ms/";
   //const url = "https://estarbien.com.pe/";
-  const url = "https://b58xfhbh-3001.brs.devtunnels.ms/";
+  //const url = "https://b58xfhbh-3001.brs.devtunnels.ms/";
+  const url =
+    "https://b58xfhbh-3001.brs.devtunnels.ms/ruta/ruta-healthy-foodie-15dias-asegurados-rimac/";
   window.location.href = url;
 }
 
