@@ -16,5 +16,4 @@
 function session() {
   console.log("EMBEDDED-APP-SESSION-EXPIRED");
 }
-
 session();
