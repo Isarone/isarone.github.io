@@ -1,5 +1,17 @@
 window.localStorage.setItem("app-embedded", "on");
 
+
+/*
+• Caso 4:  Hash
+
+	no viene hash y no es usuario EB
+		    212345678||0
+	
+    no viene hash y es usuario EB
+            212345678||1
+    
+*/
+
 const urlBase = "https://b58xfhbh-3001.brs.devtunnels.ms";
 const page = "/bienestar-en-vivo";
 const input = document.getElementById("txtInput").value;
