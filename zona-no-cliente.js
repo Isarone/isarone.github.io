@@ -1,5 +1,21 @@
 window.localStorage.setItem("app-embedded", "on");
 
+var contextEB = true;
+var backPage = "/lista-rutas/";
+var nextPage = "/ruta/prueba-auto-fisico-test-/";
+var obj = {
+  document: "76951744",
+  documentType: "2",
+  showLogin: true,
+  showRegister: false,
+  backPage,
+  nextPage,
+  navigate: false,
+  contextEB,
+};
+
+localStorage.setItem("app-storage-user-eb", JSON.stringify(obj));
+
 /*
 • Caso 4:  Hash
 
