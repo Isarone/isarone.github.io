@@ -14,7 +14,7 @@ var obj = {
   contextEB,
 };
 
-localStorage.setItem("app-storage-user-eb", JSON.stringify(obj));
+window.localStorage.setItem("app-storage-user-eb", JSON.stringify(obj));
 
 /*
 • Caso 4:  Hash
