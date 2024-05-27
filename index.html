@@ -38,22 +38,52 @@
     <div><strong>WebView:</strong> <span id="web-view-text"></span></div> -->
 
     <!-- <div id="output">Loading</div>-->
-    <div class="mb-3">
-      <label for="txtInput" class="form-label">input</label>
-      <textarea class="form-control" id="txtInput" rows="3"> </textarea>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="mt-3">
+            <label for="lblOptions" class="form-label">Embedded</label>
+            <select class="form-select" aria-label="Seleccione" id="cboOptions">
+              <option value="0">--Select--</option>
+              <option value="1">Bienestar play</option>
+              <option value="2">Bienestar en vivo</option>
+              <option value="3">Rutas</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mt-3">
+            <label for="txtInput" class="form-label">Token | Parameters</label>
+            <textarea class="form-control" id="txtInput" rows="3"> </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mt-3">
+            <button type="button" class="btn btn-primary" id="btnTest">
+              Go Test
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div
+
+    <!-- <div
       class="d-flex justify-content-center align-items-center"
       style="height: 100vh"
     >
       <button type="button" class="btn btn-primary" id="btnTest">test</button>
-    </div>
+    </div> -->
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/1.0.35/ua-parser.min.js"></script> -->
     <!-- <script src="./index.js"></script> -->
     <!-- <script src="./encrypt.js"></script> -->
     <!-- <script src="./mi-espacio-privado.js"></script> -->
-    <script src="./session-expired.js"></script>
+    <!-- <script src="./session-expired.js"></script> -->
     <!-- <script src="./zona-no-cliente.js"></script> -->
+    <script src="./embebidos.js"></script>
   </body>
 </html>
