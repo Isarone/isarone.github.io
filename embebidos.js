@@ -8,6 +8,7 @@ const getOptionsEmbedded = (value = "") => {
     1: "/bienestar-play",
     2: "/bienestar-en-vivo",
     3: "/rutas",
+    4: "/lista-rutas",
   };
 
   return options[value] || "";
