@@ -11,6 +11,7 @@ const getOptionsEmbedded = (value = "") => {
     4: "/rutas",
     5: "/lista-rutas",
     6: "event:session-expire",
+    7: "event:deep-link",
   };
 
   return options[value] || "";
@@ -32,14 +33,27 @@ const getUrl = () => {
   return `${pathBase}${optionEmbedded}${enlace}token=${parametersToken}`;
 };
 
+const getUrlBuildDev = () => {
+  const option = cboOptions.value;
+  let pathSecundaryWithParametersToken = txtInput.value.trim();
+  const pathBase = "https://vkw5nj19-3000.brs.devtunnels.ms";
+
+  return `${pathBase}${pathSecundaryWithParametersToken}`;
+};
+
 const events = (option) => {
   if (option === 6) {
     console.log("EMBEDDED-APP-SESSION-EXPIRED");
+  } else if (option === 7) {
+    const url = getUrlBuildDev();
+    console.log(url);
+    window.location.href = url;
   }
 };
 
 const isEvent = (option) => {
-  const containtEvent = option.includes("Validation");
+  const containtEvent =
+    option.includes("Validation") || option.includes("DeepLink");
   return containtEvent;
 };
 
