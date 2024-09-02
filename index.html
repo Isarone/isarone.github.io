@@ -69,6 +69,11 @@
             height: 100vw;
             object-fit: cover;
         }
+
+        .card-detail {
+            max-height: 400px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 
@@ -123,7 +128,6 @@
                         </div>
                         <div class="row">
                             <div class="col-12 mt-4">
-                                <i class="mdi mdi-home-variant d-md-none d-block text-center"></i>
                                 <h4 class="page-title text-center">Inspección #001</h4>
                                 <p class="text-center"> Eduardo Calerón, Dep 304, SJL</p>
                             </div>
@@ -142,7 +146,7 @@
                                                     <h4 class="header-title">Areas</h4>
                                                 </div>
 
-                                                <div class="card-body pt-2" style="max-height:500px; overflow-y:auto;">
+                                                <div class="card-body pt-2 card-detail">
                                                     <div class="d-flex align-items-start border-bottom">
                                                         <img class="me-3 rounded-circle"
                                                             src="/assets/images/users/avatar-2.jpg" width="40"
@@ -256,7 +260,7 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="card-body pt-2 observation"
+                                                <div class="card-body pt-2 observation card-detail"
                                                     style="max-height:500px; overflow-y:auto;">
                                                     <div class="col-sm-12 col-xl-3">
                                                         <div class="card">
