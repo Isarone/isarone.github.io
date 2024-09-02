@@ -1,4 +1,5 @@
-﻿const photo = document.querySelector("#photo");
+﻿document.body.style.overflow = "hidden";
+const photo = document.querySelector("#photo");
 const camera = document.querySelector("#camera");
 const btnNuevo = document.querySelector("#btnNuevo");
 btnNuevo.addEventListener("click", showModal);
