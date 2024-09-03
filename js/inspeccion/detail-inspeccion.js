@@ -8,12 +8,12 @@ camera.addEventListener("change", function (e) {
 });
 
 function showModal() {
-  camera.click();
   const tabActive = document.querySelector(".nav .nav-link.active")?.dataset
     .text;
   if (!tabActive) return;
 
   if (tabActive === "observacion") {
+    camera.click();
     document.querySelector("#btnNuevaObservacion").click();
   }
 }
