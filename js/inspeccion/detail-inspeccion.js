@@ -17,3 +17,9 @@ function showModal() {
     document.querySelector("#btnNuevaObservacion").click();
   }
 }
+
+// function fixNavigator(){
+
+// const ios = isIOS();
+
+// }

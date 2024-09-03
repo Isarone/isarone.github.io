@@ -1,449 +1,630 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AppTuDepaOK</title>
 
-
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
 
     <!-- Theme Config Js -->
     <script src="/assets/js/hyper-config.js"></script>
 
     <!-- App css -->
-    <link href="/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link
+      href="/assets/css/app-saas.min.css"
+      rel="stylesheet"
+      type="text/css"
+      id="app-style"
+    />
 
     <!-- Icons css -->
     <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- Menu css -->
     <link rel="stylesheet" href="/css/menu.css" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/images/apple-touch-icon.png"
+    />
     <style>
-        .tabs-buttons {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            z-index: 1;
-        }
+      .tabs-buttons {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        z-index: 1;
+      }
 
-        .floating-div {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: #727cf5;
-            /* Color de fondo */
-            color: white;
-            border-radius: 50%;
-            /* Hace el div redondo */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-        }
+      .floating-div {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: #727cf5;
+        /* Color de fondo */
+        color: white;
+        border-radius: 50%;
+        /* Hace el div redondo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
 
-        .floating-div i {
-            font-size: 24px;
-        }
+      .floating-div i {
+        font-size: 24px;
+      }
 
-        .observation .card {
-            margin-bottom: 0.6rem
-        }
+      .observation .card {
+        margin-bottom: 0.6rem;
+      }
 
-        .container-photo {
-            width: 90vw;
-            height: 100vw;
-            background-color: #2f3542;
-            margin-bottom: 3rem;
-        }
+      .container-photo {
+        width: 90vw;
+        height: 100vw;
+        background-color: #2f3542;
+        margin-bottom: 3rem;
+      }
 
-        .photo {
-            width: 100vw;
-            height: 100vw;
-            object-fit: cover;
-        }
+      .photo {
+        width: 100vw;
+        height: 100vw;
+        object-fit: cover;
+      }
 
-        .card-detail {
-            max-height: 400px;
-            overflow-y: auto;
-        }
+      .card-detail {
+        max-height: 400px;
+        overflow-y: auto;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header class="header" id="header">
-        <div class="container">
-            <nav class="navbar">
-                <b id="opcionConexion">
-                    <p class="text-success">Conectado a Internet</p>
-                </b>
-                <button type="button" class="burger" id="burger">
-                    <span class="burger-line"></span>
-                    <span class="burger-line"></span>
-                    <span class="burger-line"></span>
-                </button>
-                <span class="overlay" id="overlay"></span>
-                <div class="menu" id="menu">
-                    <ul class="menu-block">
-                        <li class="menu-item"><a class="menu-link" href="/Inspeccion/Index">Inspección</a></li>
-                        <li class="menu-item"><a class="menu-link" href="/Inspeccion/Detail">Detalle</a></li>
-
-                    </ul>
-                </div>
-            </nav>
-        </div>
+      <div class="container">
+        <nav class="navbar">
+          <b id="opcionConexion">
+            <p class="text-success">Conectado a Internet</p>
+          </b>
+          <button type="button" class="burger" id="burger">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+          </button>
+          <span class="overlay" id="overlay"></span>
+          <div class="menu" id="menu">
+            <ul class="menu-block">
+              <li class="menu-item">
+                <a class="menu-link" href="/Inspeccion/Index">Inspección</a>
+              </li>
+              <li class="menu-item">
+                <a class="menu-link" href="/Inspeccion/Detail">Detalle</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </header>
-    <div class="container" style="margin-top:5rem">
-        <main role="main" class="pb-3">
-
-            <div class="content-page">
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 tabs-buttons">
-                                <ul class="nav nav-pills bg-nav-pills nav-justified mb-2">
-                                    <li class="nav-item">
-                                        <a href="#area" data-bs-toggle="tab" aria-expanded="false"
-                                            class="nav-link rounded-0 active" data-text="area">
-                                            <span class="d-md-block">Area</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#observacion" data-bs-toggle="tab" aria-expanded="true"
-                                            class="nav-link rounded-0" data-text="observacion">
-                                            <span class="d-md-block">Observación</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- <div class="row" id="title">
+    <div class="container" style="margin-top: 5rem">
+      <main role="main" class="pb-3">
+        <div class="content-page">
+          <div class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12 tabs-buttons">
+                  <ul class="nav nav-pills bg-nav-pills nav-justified mb-2">
+                    <li class="nav-item">
+                      <a
+                        href="#area"
+                        data-bs-toggle="tab"
+                        aria-expanded="false"
+                        class="nav-link rounded-0 active"
+                        data-text="area"
+                      >
+                        <span class="d-md-block">Area</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="#observacion"
+                        data-bs-toggle="tab"
+                        aria-expanded="true"
+                        class="nav-link rounded-0"
+                        data-text="observacion"
+                      >
+                        <span class="d-md-block">Observación</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- <div class="row" id="title">
                             <div class="col-12 mt-4">
                                 <h4 class="page-title text-center">Inspección #001</h4>
                                 <p class="text-center"> Eduardo Calerón, Dep 304, SJL</p>
                             </div>
                         </div> -->
-                        <div class="floating-div" id="btnNuevo">
-                            <i class="mdi mdi-plus"></i>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <div class="tab-content">
-                                    <div class="tab-pane show active" id="area">
-                                        <div class="col-xl-4 col-lg-6">
-                                            <div class="card">
-                                                <div
-                                                    class="card-header d-flex justify-content-between align-items-center">
-                                                    <h4 class="header-title">#001 - Eduardo Calderón</h4>
+              <div class="floating-div" id="btnNuevo">
+                <i class="mdi mdi-plus"></i>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="area">
+                      <div class="col-xl-4 col-lg-6">
+                        <div class="card mt-4">
+                          <div
+                            class="card-header d-flex justify-content-between align-items-center"
+                          >
+                            <h4 class="header-title">
+                              #001 - Eduardo Calderón
+                            </h4>
+                          </div>
 
-                                                </div>
-
-                                                <div class="card-body pt-2 card-detail">
-                                                    <div class="d-flex align-items-start border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-2.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-warning-lighten float-end">Cold
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Risa Pearson</h5>
-                                                            <span class="font-13">richard.john@mail.com</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start mt-3 border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-3.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-danger-lighten float-end">Lost
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
-                                                            <span class="font-13">margaret.evans@rhyta.com</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex align-items-start mt-3 border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-2.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-warning-lighten float-end">Cold
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Risa Pearson</h5>
-                                                            <span class="font-13">richard.john@mail.com</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start mt-3 border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-3.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-danger-lighten float-end">Lost
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
-                                                            <span class="font-13">margaret.evans@rhyta.com</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start mt-3 border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-3.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-danger-lighten float-end">Lost
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
-                                                            <span class="font-13">margaret.evans@rhyta.com</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start mt-3 border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-3.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-danger-lighten float-end">Lost
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
-                                                            <span class="font-13">margaret.evans@rhyta.com</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start mt-3 border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-3.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-danger-lighten float-end">Lost
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
-                                                            <span class="font-13">margaret.evans@rhyta.com</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-items-start mt-3 border-bottom">
-                                                        <img class="me-3 rounded-circle"
-                                                            src="/assets/images/users/avatar-3.jpg" width="40"
-                                                            alt="Generic placeholder image">
-                                                        <div class="w-100 overflow-hidden">
-                                                            <span class="badge badge-danger-lighten float-end">Lost
-                                                                lead</span>
-                                                            <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
-                                                            <span class="font-13">margaret.evans@rhyta.com</span>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                                <!-- end card-body -->
-                                            </div>
-                                            <!-- end card-->
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="observacion">
-                                        <div class="col-xl-4 col-lg-6">
-                                            <div class="card" style="max-height:550px">
-                                                <div class="card-header">
-                                                    <label for="area" class="form-label">AREAS</label>
-                                                    <select class="form-select" id="area">
-                                                        <option value="1">Sala</option>
-                                                        <option value="2">Comedor</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="card-body pt-2 observation card-detail"
-                                                    style="max-height:500px; overflow-y:auto;">
-                                                    <div class="col-sm-12 col-xl-3">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="flex-shrink-0 me-3">
-                                                                        <div class="avatar-sm">
-                                                                            <img src="/assets/images/users/avatar-2.jpg"
-                                                                                class="me-2 rounded-circle" height="48"
-                                                                                alt="Brandon Smith">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        <h5 class="mt-0 mb-1">21-08-23 10:15:40</h5>
-                                                                        <p class="mb-0">La pared se encuentra con fallas
-                                                                            en el tarrajeo</p>
-                                                                    </div>
-                                                                    <div class="dropdown float-end">
-                                                                        <a href="#"
-                                                                            class="dropdown-toggle arrow-none card-drop"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
-                                                                            <i class="mdi mdi-dots-vertical"></i>
-                                                                        </a>
-                                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                                            style="">
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Editar</a>
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Remover</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 col-xl-3">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="flex-shrink-0 me-3">
-                                                                        <div class="avatar-sm">
-                                                                            <img src="/assets/images/users/avatar-2.jpg"
-                                                                                class="me-2 rounded-circle" height="48"
-                                                                                alt="Brandon Smith">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        <h5 class="mt-0 mb-1">21-08-23 10:15:40</h5>
-                                                                        <p class="mb-0">La pared se encuentra con fallas
-                                                                            en el tarrajeo</p>
-                                                                    </div>
-                                                                    <div class="dropdown float-end">
-                                                                        <a href="#"
-                                                                            class="dropdown-toggle arrow-none card-drop"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
-                                                                            <i class="mdi mdi-dots-vertical"></i>
-                                                                        </a>
-                                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                                            style="">
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Editar</a>
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Remover</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 col-xl-3">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="flex-shrink-0 me-3">
-                                                                        <div class="avatar-sm">
-                                                                            <img src="/assets/images/users/avatar-2.jpg"
-                                                                                class="me-2 rounded-circle" height="48"
-                                                                                alt="Brandon Smith">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        <h5 class="mt-0 mb-1">21-08-23 10:15:40</h5>
-                                                                        <p class="mb-0">La pared se encuentra con fallas
-                                                                            en el tarrajeo</p>
-                                                                    </div>
-                                                                    <div class="dropdown float-end">
-                                                                        <a href="#"
-                                                                            class="dropdown-toggle arrow-none card-drop"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
-                                                                            <i class="mdi mdi-dots-vertical"></i>
-                                                                        </a>
-                                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                                            style="">
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Editar</a>
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Remover</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-xl-3">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="flex-shrink-0 me-3">
-                                                                        <div class="avatar-sm">
-                                                                            <img src="/assets/images/users/avatar-2.jpg"
-                                                                                class="me-2 rounded-circle" height="48"
-                                                                                alt="Brandon Smith">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-grow-1">
-                                                                        <h5 class="mt-0 mb-1">21-08-23 10:15:40</h5>
-                                                                        <p class="mb-0">La pared se encuentra con fallas
-                                                                            en el tarrajeo</p>
-                                                                    </div>
-                                                                    <div class="dropdown float-end">
-                                                                        <a href="#"
-                                                                            class="dropdown-toggle arrow-none card-drop"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
-                                                                            <i class="mdi mdi-dots-vertical"></i>
-                                                                        </a>
-                                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                                            style="">
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Editar</a>
-                                                                            <a href="javascript:void(0);"
-                                                                                class="dropdown-item">Remover</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                          <div class="card-body pt-2 card-detail">
+                            <div class="d-flex align-items-start border-bottom">
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-2.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-warning-lighten float-end"
+                                  >Cold lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Risa Pearson</h5>
+                                <span class="font-13"
+                                  >richard.john@mail.com</span
+                                >
+                              </div>
                             </div>
+
+                            <div
+                              class="d-flex align-items-start mt-3 border-bottom"
+                            >
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-3.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-danger-lighten float-end"
+                                  >Lost lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
+                                <span class="font-13"
+                                  >margaret.evans@rhyta.com</span
+                                >
+                              </div>
+                            </div>
+                            <div
+                              class="d-flex align-items-start mt-3 border-bottom"
+                            >
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-2.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-warning-lighten float-end"
+                                  >Cold lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Risa Pearson</h5>
+                                <span class="font-13"
+                                  >richard.john@mail.com</span
+                                >
+                              </div>
+                            </div>
+
+                            <div
+                              class="d-flex align-items-start mt-3 border-bottom"
+                            >
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-3.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-danger-lighten float-end"
+                                  >Lost lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
+                                <span class="font-13"
+                                  >margaret.evans@rhyta.com</span
+                                >
+                              </div>
+                            </div>
+
+                            <div
+                              class="d-flex align-items-start mt-3 border-bottom"
+                            >
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-3.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-danger-lighten float-end"
+                                  >Lost lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
+                                <span class="font-13"
+                                  >margaret.evans@rhyta.com</span
+                                >
+                              </div>
+                            </div>
+
+                            <div
+                              class="d-flex align-items-start mt-3 border-bottom"
+                            >
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-3.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-danger-lighten float-end"
+                                  >Lost lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
+                                <span class="font-13"
+                                  >margaret.evans@rhyta.com</span
+                                >
+                              </div>
+                            </div>
+
+                            <div
+                              class="d-flex align-items-start mt-3 border-bottom"
+                            >
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-3.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-danger-lighten float-end"
+                                  >Lost lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
+                                <span class="font-13"
+                                  >margaret.evans@rhyta.com</span
+                                >
+                              </div>
+                            </div>
+
+                            <div
+                              class="d-flex align-items-start mt-3 border-bottom"
+                            >
+                              <img
+                                class="me-3 rounded-circle"
+                                src="/assets/images/users/avatar-3.jpg"
+                                width="40"
+                                alt="Generic placeholder image"
+                              />
+                              <div class="w-100 overflow-hidden">
+                                <span
+                                  class="badge badge-danger-lighten float-end"
+                                  >Lost lead</span
+                                >
+                                <h5 class="mt-0 mb-1">Margaret D. Evans</h5>
+                                <span class="font-13"
+                                  >margaret.evans@rhyta.com</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end card-body -->
                         </div>
+                        <!-- end card-->
+                      </div>
                     </div>
-                </div>
-                <!-- modal -->
-                <button type="button" class="btn btn-primary d-none" data-bs-toggle="modal"
-                    data-bs-target="#popupCamera" id="btnNuevaObservacion">
-                    Show Camera
-                </button>
-                <input type="file" accept="image/*" capture="camera" id="camera" class="inputget d-none">
-                <div class="modal fade" id="popupCamera" tabindex="-1" aria-labelledby="popupCameraLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-fullscreen">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="popupCameraLabel">Camara</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-photo">
-                                    <img id="photo" class="photo">
+                    <div class="tab-pane" id="observacion">
+                      <div class="col-xl-4 col-lg-6">
+                        <div class="card mt-4" style="max-height: 550px">
+                          <div class="card-header">
+                            <label for="area" class="form-label">AREAS</label>
+                            <select class="form-select" id="area">
+                              <option value="1">Sala</option>
+                              <option value="2">Comedor</option>
+                            </select>
+                          </div>
+
+                          <div
+                            class="card-body pt-2 observation card-detail"
+                            style="max-height: 500px; overflow-y: auto"
+                          >
+                            <div class="col-sm-12 col-xl-3">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0 me-3">
+                                      <div class="avatar-sm">
+                                        <img
+                                          src="/assets/images/users/avatar-2.jpg"
+                                          class="me-2 rounded-circle"
+                                          height="48"
+                                          alt="Brandon Smith"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                      <h5 class="mt-0 mb-1">
+                                        21-08-23 10:15:40
+                                      </h5>
+                                      <p class="mb-0">
+                                        La pared se encuentra con fallas en el
+                                        tarrajeo
+                                      </p>
+                                    </div>
+                                    <div class="dropdown float-end">
+                                      <a
+                                        href="#"
+                                        class="dropdown-toggle arrow-none card-drop"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                      </a>
+                                      <div
+                                        class="dropdown-menu dropdown-menu-end"
+                                        style=""
+                                      >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Editar</a
+                                        >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Remover</a
+                                        >
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
+                              </div>
                             </div>
-                            <div class="modal-footer">
-                                <a href="javascript:void(0);" class="btn btn-light" data-bs-dismiss="modal">Close</a>
-                                <button type="button" class="btn btn-primary">Save Changes</button>
+                            <div class="col-sm-12 col-xl-3">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0 me-3">
+                                      <div class="avatar-sm">
+                                        <img
+                                          src="/assets/images/users/avatar-2.jpg"
+                                          class="me-2 rounded-circle"
+                                          height="48"
+                                          alt="Brandon Smith"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                      <h5 class="mt-0 mb-1">
+                                        21-08-23 10:15:40
+                                      </h5>
+                                      <p class="mb-0">
+                                        La pared se encuentra con fallas en el
+                                        tarrajeo
+                                      </p>
+                                    </div>
+                                    <div class="dropdown float-end">
+                                      <a
+                                        href="#"
+                                        class="dropdown-toggle arrow-none card-drop"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                      </a>
+                                      <div
+                                        class="dropdown-menu dropdown-menu-end"
+                                        style=""
+                                      >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Editar</a
+                                        >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Remover</a
+                                        >
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
+                            <div class="col-sm-12 col-xl-3">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0 me-3">
+                                      <div class="avatar-sm">
+                                        <img
+                                          src="/assets/images/users/avatar-2.jpg"
+                                          class="me-2 rounded-circle"
+                                          height="48"
+                                          alt="Brandon Smith"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                      <h5 class="mt-0 mb-1">
+                                        21-08-23 10:15:40
+                                      </h5>
+                                      <p class="mb-0">
+                                        La pared se encuentra con fallas en el
+                                        tarrajeo
+                                      </p>
+                                    </div>
+                                    <div class="dropdown float-end">
+                                      <a
+                                        href="#"
+                                        class="dropdown-toggle arrow-none card-drop"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                      </a>
+                                      <div
+                                        class="dropdown-menu dropdown-menu-end"
+                                        style=""
+                                      >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Editar</a
+                                        >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Remover</a
+                                        >
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0 me-3">
+                                      <div class="avatar-sm">
+                                        <img
+                                          src="/assets/images/users/avatar-2.jpg"
+                                          class="me-2 rounded-circle"
+                                          height="48"
+                                          alt="Brandon Smith"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                      <h5 class="mt-0 mb-1">
+                                        21-08-23 10:15:40
+                                      </h5>
+                                      <p class="mb-0">
+                                        La pared se encuentra con fallas en el
+                                        tarrajeo
+                                      </p>
+                                    </div>
+                                    <div class="dropdown float-end">
+                                      <a
+                                        href="#"
+                                        class="dropdown-toggle arrow-none card-drop"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                      </a>
+                                      <div
+                                        class="dropdown-menu dropdown-menu-end"
+                                        style=""
+                                      >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Editar</a
+                                        >
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="dropdown-item"
+                                          >Remover</a
+                                        >
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-
-        </main>
+          </div>
+          <!-- modal -->
+          <button
+            type="button"
+            class="btn btn-primary d-none"
+            data-bs-toggle="modal"
+            data-bs-target="#popupCamera"
+            id="btnNuevaObservacion"
+          >
+            Show Camera
+          </button>
+          <input
+            type="file"
+            accept="image/*"
+            capture="camera"
+            id="camera"
+            class="inputget d-none"
+          />
+          <div
+            class="modal fade"
+            id="popupCamera"
+            tabindex="-1"
+            aria-labelledby="popupCameraLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-fullscreen">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="popupCameraLabel">Camara</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container-photo">
+                    <img id="photo" class="photo" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <a
+                    href="javascript:void(0);"
+                    class="btn btn-light"
+                    data-bs-dismiss="modal"
+                    >Close</a
+                  >
+                  <button type="button" class="btn btn-primary">
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Vendor js -->
@@ -453,6 +634,5 @@
     <script src="/js/menu.js"></script>
     <script src="/lib/app/dom/util-dom.js"></script>
     <script src="/js/inspeccion/detail-inspeccion.js"></script>
-</body>
-
+  </body>
 </html>
