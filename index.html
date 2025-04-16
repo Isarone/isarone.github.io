@@ -62,7 +62,9 @@
             border-radius: 8px;
             object-fit: contain;
             max-height: 400px;
-            border: 1px solid #ddd;
+            min-height: 300px;
+            border: 2px solid #4CAF50;
+            background-color: #f9f9f9;
         }
 
         .placeholder {
@@ -162,7 +164,7 @@
 
 <body>
     <div class="container">
-        <h1>Cámara PWA</h1>
+        <h1>Cámara ToDoElM@llquiPel@d0</h1>
 
         <!-- Estado inicial (placeholder) -->
         <div id="placeholder" class="placeholder">
@@ -245,24 +247,37 @@
 
         // Función para capturar una foto
         function capturePhoto() {
-            // Configurar el canvas con las dimensiones del video
-            const videoWidth = videoElement.videoWidth;
-            const videoHeight = videoElement.videoHeight;
-            canvas.width = videoWidth;
-            canvas.height = videoHeight;
+            try {
+                // Asegurarse de que el video está listo
+                if (videoElement.readyState !== 4) {
+                    console.log("Video no está listo todavía. Estado:", videoElement.readyState);
+                    return;
+                }
 
-            // Dibujar el frame actual del video en el canvas
-            const context = canvas.getContext('2d');
-            context.drawImage(videoElement, 0, 0, videoWidth, videoHeight);
+                // Configurar el canvas con las dimensiones del video
+                const videoWidth = videoElement.videoWidth || 640;
+                const videoHeight = videoElement.videoHeight || 480;
+                console.log("Dimensiones del video:", videoWidth, "x", videoHeight);
 
-            // Convertir el canvas a una URL de datos
-            const imageDataUrl = canvas.toDataURL('image/jpeg');
+                canvas.width = videoWidth;
+                canvas.height = videoHeight;
 
-            // Mostrar la imagen capturada
-            displayCapturedImage(imageDataUrl);
+                // Dibujar el frame actual del video en el canvas
+                const context = canvas.getContext('2d');
+                context.drawImage(videoElement, 0, 0, videoWidth, videoHeight);
 
-            // Detener el stream de la cámara
-            stopCamera();
+                // Convertir el canvas a una URL de datos
+                const imageDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                console.log("Imagen capturada. Longitud de datos:", imageDataUrl.length);
+
+                // Mostrar la imagen capturada
+                displayCapturedImage(imageDataUrl);
+
+                // Detener el stream de la cámara
+                stopCamera();
+            } catch (error) {
+                console.error("Error al capturar la foto:", error);
+            }
         }
 
         // Función para mostrar la imagen capturada
@@ -270,13 +285,31 @@
             // Asignar la URL de la imagen
             imageElement.src = imageUrl;
 
-            // Ocultar el video y mostrar la imagen
+            // Verificar que la imagen se cargó correctamente
+            imageElement.onload = function () {
+                console.log("Imagen cargada correctamente");
+            };
+
+            imageElement.onerror = function () {
+                console.error("Error al cargar la imagen");
+            };
+
+            // Ocultar el placeholder y el video
+            placeholder.classList.add('hidden');
             videoElement.classList.add('hidden');
+
+            // Mostrar la imagen
             imageElement.classList.remove('hidden');
+            imageElement.style.display = 'block';
 
             // Cambiar los botones visibles
             captureButton.classList.add('hidden');
+            startButton.classList.add('hidden');
             newPhotoButton.classList.remove('hidden');
+
+            console.log("Estado de elementos - Video:", videoElement.className,
+                "Imagen:", imageElement.className,
+                "Display de imagen:", imageElement.style.display);
         }
 
         // Función para detener la cámara
@@ -319,6 +352,13 @@
         startButton.addEventListener('click', startCamera);
         captureButton.addEventListener('click', capturePhoto);
         newPhotoButton.addEventListener('click', resetCamera);
+
+        // Evento que se dispara cuando el video está listo para reproducirse
+        videoElement.addEventListener('canplay', function () {
+            console.log("Video listo para reproducirse");
+            // Asegurarnos de que el botón de captura esté visible
+            captureButton.classList.remove('hidden');
+        });
 
         // Limpiar al cerrar la página
         window.addEventListener('beforeunload', function () {
